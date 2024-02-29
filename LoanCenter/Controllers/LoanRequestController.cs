@@ -1,5 +1,6 @@
-﻿using Microsoft.AspNetCore.Http;
-using Microsoft.AspNetCore.Mvc;
+﻿using Microsoft.AspNetCore.Mvc;
+
+using LoanCenter.Models;
 
 namespace LoanCenter.Controllers
 {
@@ -8,9 +9,9 @@ namespace LoanCenter.Controllers
     public class LoanRequestController : ControllerBase
     {
         [HttpPost]
-        public IActionResult LoanRequest(string emailAddress)
+        public IActionResult LoanRequest(LoanRequest request)
         {
-            Console.WriteLine(emailAddress);
+            Console.WriteLine(request.EmailAddress);
             return StatusCode(201);
         }
     }
