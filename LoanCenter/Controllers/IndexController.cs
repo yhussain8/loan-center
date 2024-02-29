@@ -4,7 +4,7 @@ namespace LoanCenter.Controllers
 {
     [Route("/index")]
     [ApiController]
-    public class HomePageController : ControllerBase
+    public class IndexController : ControllerBase
     {
         [HttpGet]
         public IActionResult Index()
