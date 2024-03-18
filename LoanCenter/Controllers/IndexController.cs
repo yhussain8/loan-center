@@ -6,6 +6,10 @@ namespace LoanCenter.Controllers;
 [ApiController]
 public class IndexController : ControllerBase
 {
+    /// <summary>
+    /// Gets a friendly greeting
+    /// </summary>
+    /// <returns>A greeting string</returns>
     [HttpGet]
     public IActionResult Index()
     {
