@@ -1,6 +1,14 @@
+using LoanCenter.Models;
+
 var builder = WebApplication.CreateBuilder(args);
 
-builder.Services.AddControllers();
+var minimalAPIMode = true;
+
+if (!minimalAPIMode)
+{
+    builder.Services.AddControllers();
+}
+
 builder.Services.AddEndpointsApiExplorer();
 builder.Services.AddSwaggerGen();
 
@@ -13,8 +21,22 @@ if (app.Environment.IsDevelopment())
 }
 
 app.UseHttpsRedirection();
-app.UseAuthorization();
-app.MapControllers();
+
+if (!minimalAPIMode)
+{
+    app.UseAuthorization();
+    app.MapControllers();
+}
+else
+{
+    app.MapGet("/index", () => "Hello Nick!");
+    app.MapPost("/loanrequest", async (LoanRequest request) =>
+        {
+            Console.WriteLine(request.EmailAddress);
+            return Results.StatusCode(201);
+        }
+    );
+}
 
 app.Run();
 
