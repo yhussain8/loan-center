@@ -2,6 +2,7 @@ using Microsoft.OpenApi.Models;
 using System.Reflection;
 
 using LoanCenter.Models;
+using Swashbuckle.AspNetCore.Filters;
 
 var builder = WebApplication.CreateBuilder(args);
 
@@ -23,7 +24,11 @@ builder.Services.AddSwaggerGen(x => {
 
     var xmlFilename = $"{Assembly.GetExecutingAssembly().GetName().Name}.xml";
     x.IncludeXmlComments(Path.Combine(AppContext.BaseDirectory, xmlFilename));
+
+    x.ExampleFilters();
 });
+
+builder.Services.AddSwaggerExamplesFromAssemblyOf<Program>();
 
 var app = builder.Build();
 
