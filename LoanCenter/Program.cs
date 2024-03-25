@@ -1,17 +1,24 @@
+using FluentValidation.AspNetCore;
 using Microsoft.OpenApi.Models;
 using System.Reflection;
+using Swashbuckle.AspNetCore.Filters;
 
 using LoanCenter.Models;
-using Swashbuckle.AspNetCore.Filters;
+using LoanCenter.Validators;
+using FluentValidation;
+using System;
 
 var builder = WebApplication.CreateBuilder(args);
 
-var minimalAPIMode = true;
+var minimalAPIMode = false;
 
 if (!minimalAPIMode)
 {
     builder.Services.AddControllers();
 }
+
+builder.Services.AddFluentValidationAutoValidation();
+builder.Services.AddScoped<IValidator<LoanRequest>, LoanRequestValidator>();
 
 builder.Services.AddEndpointsApiExplorer();
 builder.Services.AddSwaggerGen(x => {
@@ -27,7 +34,6 @@ builder.Services.AddSwaggerGen(x => {
 
     x.ExampleFilters();
 });
-
 builder.Services.AddSwaggerExamplesFromAssemblyOf<Program>();
 
 var app = builder.Build();
