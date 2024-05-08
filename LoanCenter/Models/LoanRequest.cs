@@ -1,4 +1,5 @@
-﻿using System.Buffers;
+﻿using System.ComponentModel;
+
 namespace LoanCenter.Models;
 
 /// <summary>
@@ -9,37 +10,38 @@ public class LoanRequest
     /// <summary>
     /// Represents if the customer is the existing owner of the property
     /// </summary>
-    public bool Owner { get; set; }
+    public bool? Owner { get; set; }
+    // todo: rename to IsOwner
 
     /// <summary>
     /// Type of property
     /// </summary>
-    public LoanProperty PropertyType { get; set; }
+    public LoanProperty? PropertyType { get; set; }
 
     /// <summary>
     /// Total purchase price of property in $CAD
     /// </summary>
-    public decimal PropertyCost { get; set; }
+    public decimal? PropertyCost { get; set; }
 
     /// <summary>
     /// Total down payment cost of property in $CAD
     /// </summary>
-    public decimal DownPayment { get; set; }
+    public decimal? DownPayment { get; set; }
 
     /// <summary>
     /// Length of loan amortization in years
     /// </summary>
-    public LoanLength LengthInYears { get; set; }
+    public LoanLength? LengthInYears { get; set; }
 
     /// <summary>
     /// Customer contact email address
     /// </summary>
-    public string EmailAddress { get; set; } = string.Empty;
+    public string? EmailAddress { get; set; } = string.Empty;
 
     /// <summary>
     /// Customer contact phone number
     /// </summary>
-    public string PhoneNumber { get; set; } = string.Empty;
+    public string? PhoneNumber { get; set; } = string.Empty;
 }
 
 /// <summary>
