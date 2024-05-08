@@ -3,6 +3,7 @@ using System.Text;
 using System.Text.Json;
 
 using LoanCenter.Models;
+using LoanCenter.SwaggerExamples;
 
 namespace LoanCenter.Tests.Controllers;
 
@@ -21,16 +22,7 @@ public class LoanRequestControllerAutomatedTests : IClassFixture<WebApplicationF
         // Arrange
         var client = _factory.CreateClient();
 
-        var loanRequest = new LoanRequest()
-        {
-            Owner = true,
-            PropertyType = LoanProperty.SingleFamilyHome,
-            PropertyCost = 1000,
-            DownPayment = 300,
-            LengthInYears = LoanLength.TwentyFive,
-            EmailAddress = "nick@coach.com",
-            PhoneNumber = "416-555-7777",
-        };
+        var loanRequest = LoanRequestCases.Valid1;
         var jsonString = JsonSerializer.Serialize(loanRequest);
         var httpContent = new StringContent(jsonString, Encoding.UTF8, "application/json");
 
