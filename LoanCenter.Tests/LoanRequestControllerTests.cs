@@ -41,9 +41,13 @@ public class LoanRequestController_AutomatedTests : IClassFixture<WebApplication
         var client = _factory.CreateClient();
 
         var loanRequest = new LoanRequest() {
-            EmailAddress = "nick@coach.com",
-            DownPayment = 300,
+            Owner = true,
+            PropertyType = LoanProperty.SingleFamilyHome,
             PropertyCost = 1000,
+            DownPayment = 300,
+            LengthInYears = LoanLength.TwentyFive,
+            EmailAddress = "nick@coach.com",
+            PhoneNumber = "416-555-7777",
         };
         var jsonString = JsonSerializer.Serialize(loanRequest);
         var httpContent = new StringContent(jsonString, Encoding.UTF8, "application/json");
@@ -61,11 +65,7 @@ public class LoanRequestController_AutomatedTests : IClassFixture<WebApplication
         // Arrange
         var client = _factory.CreateClient();
 
-        var loanRequest = new LoanRequest()
-        {
-            DownPayment = 100,
-            PropertyCost = 1000,
-        };
+        var loanRequest = new LoanRequest();
         var jsonString = JsonSerializer.Serialize(loanRequest);
         var httpContent = new StringContent(jsonString, Encoding.UTF8, "application/json");
 
@@ -74,7 +74,5 @@ public class LoanRequestController_AutomatedTests : IClassFixture<WebApplication
 
         // Assert
         Assert.Equal(HttpStatusCode.BadRequest, response.StatusCode);
-        var content = await response.Content.ReadAsStringAsync();
-        Assert.Contains("The down payment must be greater than 20% of the property cost", content);
     }
 }

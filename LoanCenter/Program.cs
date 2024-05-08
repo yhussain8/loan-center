@@ -1,21 +1,15 @@
+using FluentValidation;
 using FluentValidation.AspNetCore;
 using Microsoft.OpenApi.Models;
-using System.Reflection;
 using Swashbuckle.AspNetCore.Filters;
+using System.Reflection;
 
 using LoanCenter.Models;
 using LoanCenter.Validators;
-using FluentValidation;
-using System;
 
 var builder = WebApplication.CreateBuilder(args);
 
-var minimalAPIMode = false;
-
-if (!minimalAPIMode)
-{
-    builder.Services.AddControllers();
-}
+builder.Services.AddControllers();
 
 builder.Services.AddFluentValidationAutoValidation();
 builder.Services.AddScoped<IValidator<LoanRequest>, LoanRequestValidator>();
@@ -47,26 +41,8 @@ if (app.Environment.IsDevelopment())
 }
 
 app.UseHttpsRedirection();
-
-if (!minimalAPIMode)
-{
-    app.UseAuthorization(); 
-    app.MapControllers();
-}
-else
-{
-    app.MapGet("/index", () => "Hello Nick!")
-        .Produces<string>(StatusCodes.Status200OK, "text/plain");
-
-    app.MapPost("/loanrequest", (LoanRequest request) =>
-        {
-            Console.WriteLine(request.EmailAddress);
-            return Results.StatusCode(201);
-        }
-    )
-        .Accepts<LoanRequest>("application/json")
-        .Produces(StatusCodes.Status201Created);
-}
+app.UseAuthorization(); 
+app.MapControllers();
 
 app.Run();
 
