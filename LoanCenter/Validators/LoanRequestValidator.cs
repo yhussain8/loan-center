@@ -38,12 +38,6 @@ public class LoanRequestValidator : AbstractValidator<LoanRequest>
         RuleFor(loanRequest => loanRequest.PhoneNumber)
             .Matches(new Regex(@"((\(\d{3}\) ?)|(\d{3}-))?\d{3}-\d{4}"))
             .WithMessage("'Phone Number' is required and must be valid.");
-        
-        // todo:
-        // investigate source of default behaviour - fluent validation vs C# leveraging LoanRequest object
-        // investigate why custom messages are not being displayed
-        // validate phone number using RegEx or attribute as per: https://stackoverflow.com/questions/12908536/how-to-validate-the-phone-no
-        // refactor the messages into external object
 
         RuleFor(loanRequest => loanRequest.DownPayment)
             .Must((loanRequest, downPayment) => downPayment >= (loanRequest.PropertyCost * 0.05m))
