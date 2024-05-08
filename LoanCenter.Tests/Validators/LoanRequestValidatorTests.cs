@@ -2,7 +2,7 @@
 using LoanCenter.Models;
 using LoanCenter.Validators;
 
-namespace LoanCenter.Tests;
+namespace LoanCenter.Tests.Validators;
 
 public class LoanRequestValidatorTests
 {
@@ -35,10 +35,10 @@ public class LoanRequestValidatorTests
         {
             Owner = owner,
             PropertyType = (LoanProperty?)propertyType,
-            PropertyCost = (decimal?)propertyCost,
-            DownPayment = (decimal?)downPayment,
-            LengthInYears = (LoanLength?)lengthInYears, 
-            EmailAddress = emailAddress, 
+            PropertyCost = propertyCost,
+            DownPayment = downPayment,
+            LengthInYears = (LoanLength?)lengthInYears,
+            EmailAddress = emailAddress,
             PhoneNumber = phoneNumber
         };
 

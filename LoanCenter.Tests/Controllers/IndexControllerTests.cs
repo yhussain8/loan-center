@@ -1,6 +1,6 @@
 using LoanCenter.Controllers;
 
-namespace LoanCenter.Tests;
+namespace LoanCenter.Tests.Controllers;
 
 public class IndexController_UnitTests
 {
@@ -24,9 +24,9 @@ public class IndexController_AutomatedTests : IClassFixture<WebApplicationFactor
 {
     private readonly WebApplicationFactory<Program> _factory;
 
-    public IndexController_AutomatedTests(WebApplicationFactory<Program> factory) 
-    { 
-        _factory = factory; 
+    public IndexController_AutomatedTests(WebApplicationFactory<Program> factory)
+    {
+        _factory = factory;
     }
 
     [Fact]
@@ -38,7 +38,7 @@ public class IndexController_AutomatedTests : IClassFixture<WebApplicationFactor
         // Act
         var response = await client.GetAsync("/index");
         var responseString = await response.Content.ReadAsStringAsync();
-            
+
         // Assert
         response.EnsureSuccessStatusCode();
         Assert.Equal("Hello Nick!", responseString);
